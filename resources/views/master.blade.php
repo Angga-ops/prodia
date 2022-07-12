@@ -13,8 +13,10 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/nucleo-svg.css') }}">
-     <!-- CSS Files -->
+    <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+    <!--DataTables-->
+    <link href="{{ asset('assets/css/dataTable.min.css') }}" rel="stylesheet" />
   </head>
 <body class="g-sidenav-show   bg-gray-100">
 <div class="min-height-300 position-absolute w-100"></div>
@@ -38,11 +40,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/content/news">
+          <a class="nav-link " href="/content/artikel">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">News</span>
+            <span class="nav-link-text ms-1">Artikel</span>
           </a>
         </li>
         <li class="nav-item">
@@ -208,13 +210,13 @@
 <!-- End Navbar -->
 @yield('konten');
 </main>
-@stack('scripts')
 <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
+@stack('scripts')
+    
     
 
 <script>

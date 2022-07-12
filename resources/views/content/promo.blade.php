@@ -10,7 +10,7 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
-            <table class="table align-items-center justify-content-center mb-0 yajra">
+            <table class=" align-items-center justify-content-center mb-0 yajra">
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul</th>
@@ -20,7 +20,7 @@
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
+              {{-- <tbody>
                 @foreach ($data['data'] as $item)
                 <tr>
                   <td>
@@ -41,7 +41,7 @@
                   </td>
                 </tr>
                 @endforeach
-              </tbody>
+              </tbody> --}}
             </table>
           </div>
         </div>
@@ -51,29 +51,35 @@
 </div>
 @endsection
 @push('scripts')
-
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/dataTable.min.js') }}"></script>
 <script type="text/javascript">
-    $(function () {
-      
-      var table = $('.yajra').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "{{ route('user.index') }}",
-          columns: [
-              {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-              {data: 'name', name: 'name'},
-              {data: 'gender', name: 'gender'},
-              {data: 'email', name: 'email'},
-              {data: 'phone', name: 'phone'},
-              {
-                  data: 'action', 
-                  name: 'action', 
-                  orderable: true, 
-                  searchable: true
-              },
-          ]
-      });
-      
-    });
+	$(function(){
+		$('.yajra').DataTable({
+                processing: true,
+                ajax: '{!! route('content.dtPromo') !!}', // memanggil route yang menampilkan data json
+                columns: [{ // mengambil & menampilkan kolom sesuai tabel database
+                        data: 'title',
+                        name: 'title'
+                    },
+                    {
+                        data: 'date_start',
+                        name: 'date_start'
+                    },
+                    {
+                        data: 'date_end',
+                        name: 'date_end'
+                    },
+                    {
+                        data: 'content',
+                        name: 'content'
+                    },
+                    {
+                        data: 'image',
+                        name: 'image'
+                    },
+                ]
+            });
+        });
 </script>
 @endpush
