@@ -13,9 +13,7 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/nucleo-svg.css') }}">
-    <!--Yajra Datatables -->
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-dataTables.min.css') }}">
-    <!-- CSS Files -->
+     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
   </head>
 <body class="g-sidenav-show   bg-gray-100">
@@ -216,7 +214,7 @@
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery-dataTables.min.js') }}"></script>
+
     
 
 <script>
