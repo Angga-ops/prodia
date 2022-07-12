@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //if name is AdminController itchu adalah Dashboard Controller
-Route::get('/', 'AdminController@Dashboard')->name('Dashboard');
-Route::get('/content/dashboard', 'AdminController@Dashboard');
-//if name is NewsController itchu adalah News Controller
-Route::get('/content/artikel', 'ArtikelController@index')->name('content.index');
-Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
-Route::get('/content/news', 'NewsController@index');
-//if name is PromoController itchu adalah Promo Controller
-Route::get('/content/promo', 'PromoController@index')->name('content.promo');
-Route::get('/content/promo/dtPromo', 'PromoController@dtPromo')->name('content.dtPromo');
+
+Route::middleware(['auth_granted'])->group(function(){
+    Route::get('/', 'AdminController@Dashboard')->name('Dashboard');
+    Route::get('/content/dashboard', 'AdminController@Dashboard');
+    //if name is NewsController itchu adalah News Controller
+    Route::get('/content/artikel', 'ArtikelController@index')->name('content.index');
+    Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
+    Route::get('/content/news', 'NewsController@index');
+    //if name is PromoController itchu adalah Promo Controller
+    Route::get('/content/promo', 'PromoController@index')->name('content.promo');
+    Route::get('/content/promo/dtPromo', 'PromoController@dtPromo')->name('content.dtPromo');
+});
+
+Route::middleware(['auth_denied'])->group(function(){
+    Route::match(['get','post'], '/login', 'AuthController@index')->name('login');
+});
