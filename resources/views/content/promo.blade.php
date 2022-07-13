@@ -9,13 +9,14 @@
           <h6>Projects table</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0">
+          <div class="table-responsive p-0 ">
             <table class=" align-items-center justify-content-center mb-0 yajra">
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tenggat promo</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" style="max-width: 100px">konten</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal Mulai</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal Akhir</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">konten</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Foto</th>
                   <th></th>
                 </tr>
@@ -56,15 +57,19 @@
 <script type="text/javascript">
 	$(function(){
 		$('.yajra').DataTable({
-                processing: true,
+                processing: false,
                 ajax: '{!! route('content.dtPromo') !!}', // memanggil route yang menampilkan data json
-                columns: [{ // mengambil & menampilkan kolom sesuai tabel database
+                responsive: true,
+                bAutoWidth: false,
+                paging: true,
+                aoColumns: [{ // mengambil & menampilkan kolom sesuai tabel database
                         data: 'title',
                         name: 'title'
                     },
                     {
                         data: 'date_start',
-                        name: 'date_start'
+                        name: 'date_start',
+                        
                     },
                     {
                         data: 'date_end',
@@ -72,7 +77,7 @@
                     },
                     {
                         data: 'content',
-                        name: 'content'
+                        name: 'content',
                     },
                     {
                         data: 'image',
