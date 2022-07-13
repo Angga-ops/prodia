@@ -27,7 +27,7 @@
                             <td>{{ $item['name'] }}</td>
                             <td><img src="{{ $item['image'] }}" ></td>
                             <td>{{ $item['publish_date'] }}</td>
-                            <td><a href="{{ route('artikel.delete',$item['article_id']) }}"></a></td>
+                            <td><a href="{{ route('artikel.delete',$item['article_id']) }}" class="btn btn-danger btn-sm">Hapus</a></td>
                         </tr>
                         @endforeach
                     </tbody>
