@@ -13,9 +13,9 @@
                 <table class="table align-items-center justify-content-center data" width="100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Judul</th>
                             <th>Nama</th>
-                             <th>Foto</th>
                             <th>Publish</th>
                             <th>Aksi</th>
                         </tr>
@@ -23,9 +23,9 @@
                     <tbody>
                         @foreach ($data['data']['fb'] as $item)
                         <tr>
+                          <td class="text-center"><img src="{{ str_replace('http:/','http://',$item['image']) }}" class="avatar avatar-sm me-3" ></td>
                             <td>{{ $item['title'] }}</td>
                             <td>{{ $item['name'] }}</td>
-                            <td><img src="{{ $item['image'] }}" ></td>
                             <td>{{ $item['publish_date'] }}</td>
                             <td><a href="{{ route('artikel.delete',$item['article_id']) }}" class="btn btn-danger btn-sm">Hapus</a></td>
                         </tr>
@@ -38,8 +38,3 @@
     </div>
   </div>
 @endsection
-@push('scripts')
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/dataTable.min.js') }}"></script>
-
-@endpush
