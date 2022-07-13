@@ -23,8 +23,9 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/content/artikel/delete/{article_id}', 'ArtikelController@destroy')->name('artikel.delete');
     Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
     //if name is PromoController itchu adalah Promo Controller
-    Route::get('/content/promo', 'PromoController@index')->name('content.promo');
-    Route::get('/content/promo/dtPromo', 'PromoController@dtPromo')->name('content.dtPromo');
+    Route::match(['get','post'], '/content/promo', 'PromoController@index')->name('content.promo');
+    Route::get('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.delete');
+    Route::post('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.edit');
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 
