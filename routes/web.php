@@ -19,6 +19,7 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/content/dashboard', 'AdminController@Dashboard');
     //if name is NewsController itchu adalah News Controller
     Route::get('/content/artikel', 'ArtikelController@index')->name('content.index');
+    Route::get('/content/artikel/delete', 'ArtikelController@delete')->name('artikel.delete');
     Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
     Route::get('/content/news', 'NewsController@index');
     //if name is PromoController itchu adalah Promo Controller
