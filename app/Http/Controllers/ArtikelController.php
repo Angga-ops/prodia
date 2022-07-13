@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
 class ArtikelController extends Controller
 {
+    private $baseUrl =  'http://103.214.53.148:51999/v1/article';
     public function index(Request $request){
         $request = Http::withHeaders([
             'Content-type' =>  'application/json',
             'Authorization' => ' Bearer '.session('token'),
-        ])->get('http://103.214.53.148:51999/v1/article');
+        ])->get($this->baseUrl);
         $response = $request->getBody()->getContents();
         $data = json_decode($response,true);
         
@@ -35,11 +36,23 @@ class ArtikelController extends Controller
     //     return json_encode($json);
     // }
 
-    public function delete($article_id){
+    public function destroy($article_id){
         $request = Http::withHeaders([
             'Content-type' =>  'application/json',
+            'Accept' =>  'application/json',
             'Authorization' => ' Bearer '.session('token'),
-        ])->delete('http://103.214.53.148:51999/v1/article?'.$article_id);
-        
+        ])->withOptions([
+            'query' => [
+                'article_id' => $article_id
+            ]
+        ])->delete($this->baseUrl);
+        $response = $request->getStatusCode();
+        $data = json_decode($request->getBody(),true);
+
+        // dd($data);
+        if($data['success']){
+            return redirect('/content/artikel')
+                        ->with('success',$data['message']);
+        }
     }
 }
