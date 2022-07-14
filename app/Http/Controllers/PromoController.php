@@ -55,7 +55,6 @@ class PromoController extends Controller
             ]
         ]);
         $response = json_decode($requestApi->getBody()->getContents(),true);
-        dd($response);
         return redirect()->back()->with('success',$response['message']);
     }
 
