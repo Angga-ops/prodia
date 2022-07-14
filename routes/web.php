@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 //if name is AdminController itchu adalah Dashboard Controller
 
 Route::middleware(['auth_granted'])->group(function(){
-    Route::get('/', 'AdminController@Dashboard')->name('Dashboard');
-    Route::get('/content/dashboard', 'AdminController@Dashboard');
+    // Route::get('/', 'AdminController@Dashboard')->name('Dashboard');
+    // Route::get('/content/dashboard', 'AdminController@Dashboard');
     //if name is NewsController itchu adalah News Controller
-    Route::get('/content/artikel', 'ArtikelController@index')->name('content.index');
+    Route::get('/', 'ArtikelController@index')->name('content.index');
     Route::get('/content/artikel/show/{article_id}', 'ArtikelController@show')->name('artikel.show');
     Route::get('/content/artikel/delete/{article_id}', 'ArtikelController@destroy')->name('artikel.delete');
     Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');

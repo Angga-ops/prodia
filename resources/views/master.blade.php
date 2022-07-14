@@ -57,14 +57,14 @@
             <span class="nav-link-text ms-1">Promo</span>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link " href="./pages/virtual-reality.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">User</span>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link " href="/logout">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -112,7 +112,7 @@
           <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          {{-- <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input type="text" class="form-control" placeholder="Type here..." />
@@ -203,7 +203,7 @@
                       </div>
                     </div>
                   </a>
-                </li>
+                </li> --}}
               </ul>
             </li>
           </ul>

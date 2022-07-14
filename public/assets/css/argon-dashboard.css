@@ -3772,6 +3772,10 @@ fieldset:disabled .btn {
     --bs-btn-disabled-bg: #f5365c;
     --bs-btn-disabled-border-color: #f5365c;
 }
+.btn-persadia {
+    --bs-btn-bg: #ffdd39;
+    --bs-btn-color: #fff;
+}
 
 .btn-light {
     --bs-btn-color: #000;
@@ -21777,6 +21781,9 @@ label,
 
 .bg-gradient-primary {
     background-image: linear-gradient(310deg, #5e72e4 0%, #825ee4 100%);
+}
+.bg-gradient-persadia {
+    background-image: linear-gradient(310de, #ffdd39 100%);
 }
 
 .bg-gradient-secondary {
