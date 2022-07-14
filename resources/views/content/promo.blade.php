@@ -72,7 +72,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="form" method="post" enctype="multipart/form-data">
+      <form action="{{ url('/content/promo/add') }}" id="form" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
           <div class="mb-3">
