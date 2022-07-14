@@ -11,11 +11,6 @@ class PromoController extends Controller
     private $base_url = 'http://103.214.53.148:51999/v1/promo';
 
     public function index(Request $request){
-        
-        if ($request->isMethod('post')) {
-            $this->add($request);
-            return;
-        }
 
         $request = Http::withHeaders([
             'Content-type' =>  'application/json',
@@ -39,23 +34,29 @@ class PromoController extends Controller
         return redirect()->back()->with('success',$response['message']);
     }
 
-    private function add(Request $request)
+    public function add(Request $request)
     {
+        // dd([
+        //     'title' => $request->title,
+        //     'content' => $request->content,
+        //     'end_date' => $request->date_start,
+        //     'start_date' => $request->date_end,
+        //     'image' => $request->file('image')
+        // ]);
+        // storage_path('app/').$path
+        // dd(file_get_contents($request->file('image')->getPathname()));
+        $path = $request->file('image')->store('images');
         $requestApi = Http::withHeaders([
             'Accept' =>  'application/json',
-            'Content-Type' => 'multipart/form-data',
             'Authorization' => ' Bearer '. session('token'),
-        ])->post($this->base_url,[
-            'multipart' => [
-                'title' => $request->title,
-                'content' => $request->content,
-                'date_start' => $request->date_start,
-                'date_end' => $request->date_end,
-                'image' => $request->file('image')
-            ]
+        ])->attach('image',file_get_contents($request->file('image')))->post($this->base_url,[
+            'title' => $request->title,
+            'content' => $request->content,
+            'end_date' => $request->date_start,
+            'start_date' => $request->date_end
         ]);
         $response = json_decode($requestApi->getBody()->getContents(),true);
-        return redirect()->back()->with('success',$response['message']);
+        return redirect('/content/promo')->with('success',$response['message']);
     }
 
 }
