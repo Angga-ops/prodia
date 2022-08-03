@@ -13,11 +13,12 @@
                         </div>
                       </div>
                         @endif
-                      </div>
+                      
                       <div class="d-flex flex-row justify-content-between items-center">
-                        <h6>Artikel</h6>
-                        <button class="btn d-flex btn-md btn-primary mx-1 p-2 showBtn" data-mode="add"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</button>
+                        <h5>Artikel</h6>
+                        <button class="btn d-flex btn-md btn-primary mx-1 showBtn" data-mode="add"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</button>
                       </div>
+                    </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
                 <table class="table align-items-center justify-content-center data" width="100%">

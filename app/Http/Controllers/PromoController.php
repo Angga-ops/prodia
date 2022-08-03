@@ -16,8 +16,9 @@ class PromoController extends Controller
             'Content-type' =>  'application/json',
             'Authorization' => ' Bearer '. session('token'),
         ])->get($this->base_url);
-        $response = json_decode($request->getBody()->getContents(),true);
-        return View::make('content.promo',['data' => $response]);
+        $response = $request->getBody()->getContents();
+        $data = json_decode($response,true);
+        return View::make('content.promo')->with(compact('data'));
     }
 
     public function delete($promo_id)

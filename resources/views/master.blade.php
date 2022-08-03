@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prodia</title>
+  <title>Persadia</title>
   <!--font and icon-->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -18,6 +18,7 @@
   <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
   <!--DataTables-->
   <link href="{{ asset('assets/css/dataTable.min.css') }}" rel="stylesheet" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -27,7 +28,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
         {{-- <img src="./assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo"> --}}
-        <span class="ms-1 font-weight-bold">Prodia</span>
+        <span class="ms-1 font-weight-bold">Persadia</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -54,17 +55,17 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-money-coins text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Promo</span>
+            <span class="nav-link-text ms-1">Event</span>
           </a>
         </li>
-        {{-- <li class="nav-item">
-          <a class="nav-link " href="./pages/virtual-reality.html">
+        <li class="nav-item">
+          <a class="nav-link " href="/content/forum">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
+              <i class="ni ni-email-83 text-secondary text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">User</span>
+            <span class="nav-link-text ms-1">Forum</span>
           </a>
-        </li> --}}
+        </li>
         <li class="nav-item">
           <a class="nav-link " href="/logout">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

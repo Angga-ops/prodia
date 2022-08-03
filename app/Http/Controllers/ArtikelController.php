@@ -16,6 +16,7 @@ class ArtikelController extends Controller
         $response = $request->getBody()->getContents();
         $data = json_decode($response,true);
         
+        
         return View::make('content.artikel')->with(compact('data'));
     }
 
@@ -38,7 +39,6 @@ class ArtikelController extends Controller
 
     public function destroy($article_id){
         $request = Http::withHeaders([
-            'Content-type' =>  'application/json',
             'Accept' =>  'application/json',
             'Authorization' => ' Bearer '.session('token'),
         ])->withOptions([

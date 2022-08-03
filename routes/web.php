@@ -27,6 +27,18 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::post('/content/promo/add', 'PromoController@add')->name('content.promo.add');
     Route::get('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.delete');
     Route::post('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.edit');
+    //Controller Diskusi
+    Route::get('/content/diskusi', 'DiskusiController@index')->name('content.diskusi');
+    //COntroller Forum
+    Route::get('/content/forum', 'ForumController@index')->name('content.forum');
+    Route::get('/form/forum/{forum_id}', 'ForumController@detail')->name('forum.detail');
+    Route::post('/form/forum/detail/{forum_id}', 'ForumController@reply')->name('reply.tambah');
+
+    Route::get('/forum/delete/{forum_reply_id}', 'ForumController@deleteReply')->name('delete.reply');
+
+    Route::get('/form/forum/tambah/index', 'ForumController@add')->name('forum.tambah');
+    Route::post('/form/forum/tambah/index', 'ForumController@post')->name('forum.post');
+    Route::get('/content/forum/{forum_id}', 'ForumController@delete')->name('forum.delete');
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 

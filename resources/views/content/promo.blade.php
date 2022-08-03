@@ -7,7 +7,7 @@
       <div class="card mb-4">
         <div class="card-header pb-0">
           <div class="d-flex flex-row justify-content-between items-center">
-            <h5>Promo</h5>
+            <h5>Event</h5>
             <button class="btn d-flex btn-md btn-primary mx-1 showBtn" data-mode="add"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</button>
           </div>
         </div>
@@ -16,41 +16,41 @@
             <table class="table align-items-center mb-0 w-100">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-center text-secondary font-weight-bolder opacity-7">No</th>
-                  <th class="text-uppercase text-center text-secondary font-weight-bolder text-center opacity-7 ps-2">Foto</th>
-                  <th class="text-uppercase text-center text-secondary font-weight-bolder opacity-7">Judul</th>
-                  <th class="text-uppercase text-center text-secondary font-weight-bolder opacity-7 ps-2">Tanggal Mulai</th>
-                  <th class="text-uppercase text-center text-secondary font-weight-bolder opacity-7 ps-2">Tanggal Akhir</th>
-                  <th class="text-uppercase text-center text-secondary font-weight-bolder opacity-7 ps-2">Aksi</th>
+                  
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Mulai</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Akhir</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($data['data'] as $key => $value)
+                @foreach ($data['promotion'] as $promo)
+                    
                 <tr>
                   <td class="text-center">
-                    {{ $key+1 }}
-                  </td>
-                  <td class="text-center">
-                    <img src="{{ str_replace('http:/','http://',$value['image']) }}" width="50px" height="50px" class="border rounded" alt="">
+                    <img src="{{ str_replace('http:/','http://',$promo['image']) }}" width="50px" height="50px" class="border rounded" alt="">
                   </td>
                   <td>
-                    <div class="d-flex px-2">
-                      <div class="my-auto">
-                        <p class="mb-0 font-weight-bold">{{ $value['title'] }}</p>
+                      <div class="d-flex flex-column justify-content-center">
+                        <p class="mb-0 text-sm">{{ $promo['title'] }}</p>
                       </div>
+                  </td>
+                  <td>
+                  <div class="d-flex flex-column justify-content-center">
+                      <p class="mb-0 text-sm">{{ date("D, d F Y",strtotime($promo['date_start'])) }}</p>
+                  </div>
+                  </td>
+                  <td>
+                    <div class="d-flex flex-column justify-content-center">
+                    <p class="mb-0 text-sm">{{ date("D, d F Y",strtotime($promo['date_end'])) }}</p>
                     </div>
                   </td>
                   <td>
-                    <p class="font-weight-bold mb-0 text-center">{{ date("D, d F Y",strtotime($value['date_start'])) }}</p>
-                  </td>
-                  <td>
-                    <p class="font-weight-bold mb-0 text-center">{{ date("D, d F Y",strtotime($value['date_end'])) }}</p>
-                  </td>
-                  <td>
                     <div class="d-flex flex-sm-column flex-md-row justify-content-center">
-                      <button class="btn d-flex btn-md btn-primary mx-1 showBtn" data-promo="{{ base64_encode(json_encode($data['data'][$key])) }}" data-mode="detail"><i class="fa fa-eye m-auto" aria-hidden="true"></i> &nbsp Detail</button>
-                      <button class="btn d-flex btn-md btn-success mx-1 showBtn" data-promo="{{ base64_encode(json_encode($data['data'][$key])) }}" data-mode="edit"><i class="fa fa-edit m-auto" aria-hidden="true"></i> &nbsp Edit</button>
-                      <button class="btn d-flex btn-md btn-danger mx-1 deleteBtn" data-id="{{ $value['promotion_id'] }}"><i class="fa fa-trash m-auto" aria-hidden="true"></i> &nbsp Hapus</button>
+                      <button class="btn d-flex btn-xs btn-primary mx-1 showBtn" data-promo="{{ base64_encode(json_encode($promo['promotion_id'])) }}" data-mode="detail"><i class="fa fa-eye m-auto" aria-hidden="true"></i> &nbsp Detail</button>
+                      <button class="btn d-flex btn-xs btn-success mx-1 showBtn" data-promo="{{ base64_encode(json_encode($promo['promotion_id'])) }}" data-mode="edit"><i class="fa fa-edit m-auto" aria-hidden="true"></i> &nbsp Edit</button>
+                      <button class="btn d-flex btn-xs btn-danger mx-1 deleteBtn" data-id="{{ $promo['promotion_id'] }}"><i class="fa fa-trash m-auto" aria-hidden="true"></i> &nbsp Hapus</button>
                     </div>
                   </td>
                 </tr>
