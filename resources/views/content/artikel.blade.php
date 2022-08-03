@@ -39,9 +39,9 @@
                           <td>{{ $item['name'] }}</td>
                           <td>{{ $item['publish_date'] }}</td>
                           <td>
-                            <a href="#"  type="button" class="btn btn-xs btn-info open_modal"   data-toggle="modal" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
-                            <a href="#"  class="btn btn-xs btn-warning open_modal"  id="duar" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="{{ route('artikel.delete', $item['article_id']) }}"  id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Hapus</a></td>
+                            <a href="#"  type="button" class="btn btn-xs btn-info"   data-toggle="modal" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
+                            <a href="#"  class="btn btn-xs btn-warning edit_article" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
+                            <a href="{{ route('artikel.delete', $item['article_id']) }}"  id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Delete</a></td>
                           </tr>  
                       @endforeach
                       @endif
@@ -95,7 +95,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ubah Artikel</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="/content/artikel/tambah" method="post" enctype="multipart/form-data">
@@ -110,7 +110,7 @@
           </div>
           <div class="m-3">
               <label for="exampleFormControlInput1" class="form-label">Tanggal Pubish</label>
-              <input type="date" class="form-control" name="tgl_publish" placeholder="Masukan judul" required>
+              <input type="date" class="form-control" name="tgl_publish" required>
           </div>
           <div class="m-3">
             <label for="#image">Foto</label>
@@ -118,6 +118,43 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+          </div>
+        </form>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" id="editModalClose" aria-label="Close"></button>
+        </div>
+        <form id="editForm" method="post" enctype="multipart/form-data">
+          @csrf
+          <div class="m-3">
+            <label for="exampleFormControlInput1" class="form-label">Judul</label>
+            <input type="text" class="form-control" name="judul" placeholder="Masukan judul" id="editTitle" required>
+          </div>
+          <div class="m-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Konten</label>
+            <textarea class="form-control" name="konten" placeholder="Masukan" rows="3" id="editContent" required></textarea>
+          </div>
+          <div class="m-3">
+              <label for="exampleFormControlInput1" class="form-label">Tanggal Pubish</label>
+              <input type="date" class="form-control" name="tgl_publish" placeholder="Masukan judul" id="editPublish" required>
+          </div>
+          <div class="m-3">
+            <label for="#image">Foto</label>
+            <input type="file" name="foto" id="image" class="form-control">
+          </div>
+          <div class="m-3">
+            <img src="" id="editImgPreview" class="w-100" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="editClose" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Kirim</button>
           </div>
         </form>
@@ -140,6 +177,33 @@
   $('.done').on('click',function(e){
     $('#modal').modal('hide');
   });
+
+  // Edit Modal
+  $('.edit_article').on('click', function(e){
+    setValueEdit($(this).data('artikel'))
+    $('#modalEdit').modal('show')
+  })
+  $('#editModalClose').on('click', function(e){
+    $('#modalEdit').modal('hide')
+  })
+  $('#editClose').on('click', function(e){
+    $('#modalEdit').modal('hide')
+  })
+
+  const setValueEdit = (dataEncrypt) => {
+    const data = JSON.parse(atob(dataEncrypt))
+    const publish_date = data.publish_date.split('T')
+    const baseUrl = "{{ url('/content/artikel/edit/') }}"
+    const actionForm = baseUrl + '/' + data.article_id
+
+    $('#editForm').attr('action',actionForm)
+    $('#editTitle').val(data.title)
+    $('#name').val(data.name)
+    $('#editContent').val(data.content)
+    $('#editPublish').val(publish_date[0])
+    $('#editImagePreview').attr('src',data.image.replace('http:/','http://'))
+  }
+
   const setValue = (dataEncrypt) => {
     const data = JSON.parse(atob(dataEncrypt))
     console.log(data)
