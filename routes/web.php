@@ -22,6 +22,7 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/content/artikel/show/{article_id}', 'ArtikelController@show')->name('artikel.show');
     Route::get('/content/artikel/delete/{article_id}', 'ArtikelController@destroy')->name('artikel.delete');
     Route::post('/content/artikel/tambah', 'UserController@addArticle')->name('artikel.add');
+    Route::post('/content/artikel/edit/{article_id}', 'ArtikelController@editArticle')->name('artikel.edit');
     
     // Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
     
