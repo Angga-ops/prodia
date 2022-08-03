@@ -40,30 +40,30 @@ class ArtikelController extends Controller
 
     public function editArticle(Request $request,$article_id)
     {
-        $path = $request->file('foto')->store('images');
-        if ($request->file('foto') != null) {
-            $requestApi = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'multipart/form-data',
-                'Authorization' => ' Bearer '.session('token'),
-            ])->withOptions([
-                'query' => [
-                    'article_id' => $article_id
-                ]
-            ])->put($this->baseUrl,[
-                'title' => $request->judul,
-                'content' => $request->konten,
-                'publish_date' => $request->tgl_publish,
-                'file' => $request->file('foto')
-            ]);
-            $response = $requestApi->getBody()->getContents();
-            $data = json_decode($response,true);
-            dd($response);
-            if ($data['success']) {
-                return redirect()->back()->with('success',$data['message']);
-            }
-            return redirect()->back()->with('error',$data['message']);
-        }
+        // dd($article_id);
+        // $path = $request->file('foto')->store('images');
+        // if ($request->file('foto') != null) {
+        //     $requestApi = Http::withHeaders([
+        //         'Accept' => 'application/json',
+        //         'Content-Type' => 'multipart/form-data',
+        //         'Authorization' => ' Bearer '.session('token'),
+        //     ])->withOptions([
+        //         'query' => [
+        //             'article_id' => $article_id
+        //         ]
+        //     ])->put($this->baseUrl,[
+        //         'title' => $request->judul,
+        //         'content' => $request->konten,
+        //         'publish_date' => $request->tgl_publish,
+        //         'file' => $request->file('foto')
+        //     ]);
+        //     $response = $requestApi->getBody()->getContents();
+        //     $data = json_decode($response,true);
+        //     if ($data['success']) {
+        //         return redirect()->back()->with('success',$data['message']);
+        //     }
+        //     return redirect()->back()->with('error',$data['message']);
+        // }
         $requestApi = Http::withHeaders([
             'Content-type' =>  'application/json',
             'Authorization' => ' Bearer '.session('token'),

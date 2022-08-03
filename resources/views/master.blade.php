@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="{{ asset('assets/img/logo persadia.png') }}">
   <title>Persadia</title>
   <!--font and icon-->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -28,7 +29,8 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
         {{-- <img src="./assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo"> --}}
-        <span class="ms-1 font-weight-bold">Persadia</span>
+        <img class="navbar-brand-img h-100" src="{{ asset('assets/img/logo persadia.png') }}" alt="">
+        <span class="ms-1 font-weight-bold"> Persadia</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
