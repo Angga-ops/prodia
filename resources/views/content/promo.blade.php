@@ -48,9 +48,9 @@
                   </td>
                   <td>
                     <div class="d-flex flex-sm-column flex-md-row justify-content-center">
-                      <button class="btn d-flex btn-xs btn-primary mx-1 showBtn" data-promo="{{ base64_encode(json_encode($promo['promotion_id'])) }}" data-mode="detail"><i class="fa fa-eye m-auto" aria-hidden="true"></i> &nbsp Detail</button>
-                      <button class="btn d-flex btn-xs btn-success mx-1 showBtn" data-promo="{{ base64_encode(json_encode($promo['promotion_id'])) }}" data-mode="edit"><i class="fa fa-edit m-auto" aria-hidden="true"></i> &nbsp Edit</button>
-                      <a href="{{ route('content.promo.delete', $promo['promotion_id']) }}" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Hapus</a>
+                      <button class="btn d-flex btn-xs btn-primary mx-1 detailShowBtn" data-promo="{{ base64_encode(json_encode($promo)) }}" data-mode="detail"><i class="fa fa-eye m-auto" aria-hidden="true"></i> &nbsp Detail</button>
+                      <button class="btn d-flex btn-xs btn-success mx-1 editShowBtn" data-promo="{{ base64_encode(json_encode($promo)) }}" data-mode="edit"><i class="fa fa-edit m-auto" aria-hidden="true"></i> &nbsp Edit</button>
+                      <button class="btn d-flex btn-xs btn-danger mx-1 deleteBtn" data-id="{{ $promo['promotion_id'] }}"><i class="fa fa-trash m-auto" aria-hidden="true"></i> &nbsp Hapus</button>
                     </div>
                   </td>
                 </tr>
@@ -63,7 +63,7 @@
     </div>
   </div>
 </div>
-<div class="modal" id="promoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -72,7 +72,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{ url('/content/promo/add') }}" id="form" method="post" enctype="multipart/form-data">
+      <form action="{{ url('/content/promo/add') }}" id="addForm" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
           <div class="mb-3">
@@ -99,6 +99,103 @@
               </div>
               <div class="flex-shrink-1 p-2" style="max-width: 50%;">
                 <img class="w-100" id="image-preview" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary modal-save">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="addForm" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="#title">Judul</label>
+            <input type="text" class="form-control" id="detailTitle" name="title" disabled />
+          </div>
+          <div class="mb-3">
+            <label for="#date_start">Tanggal Mulai</label>
+            <input type="date" name="date_start" id="detail_date_start" class="form-control" disabled />
+          </div>
+          <div class="mb-3">
+            <label for="#date_end">Tanggal Akhir</label>
+            <input type="date" name="date_end" id="detail_date_end" class="form-control" disabled />
+          </div>
+          <div class="mb-3">
+            <label for="#content">Konten</label>
+            <textarea name="content" id="detailContent" class="form-control" rows="5" disabled></textarea>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex flex-column">
+              <div class="flex-shrink-1">
+                <label for="#image">Foto</label>
+                <input type="file" name="image" id="detailImage" class="form-control" disabled>
+              </div>
+              <div class="flex-shrink-1 p-2" style="max-width: 50%;">
+                <img class="w-100" id="detail-image-preview" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="editForm" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="#title">Judul</label>
+            <input type="text" class="form-control" id="editTitle" name="title" />
+          </div>
+          <div class="mb-3">
+            <label for="#date_start">Tanggal Mulai</label>
+            <input type="date" name="date_start" id="edit_date_start" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label for="#date_end">Tanggal Akhir</label>
+            <input type="date" name="date_end" id="edit_date_end" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label for="#content">Konten</label>
+            <textarea name="content" id="editContent" class="form-control" rows="5"></textarea>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex flex-column">
+              <div class="flex-shrink-1">
+                <label for="#image">Foto</label>
+                <input type="file" name="image" id="editImage" class="form-control">
+              </div>
+              <div class="flex-shrink-1 p-2" style="max-width: 50%;">
+                <img class="w-100" id="edit-image-preview" />
               </div>
             </div>
           </div>
@@ -144,31 +241,63 @@
   });
 
   $(".showBtn").on("click", function(e) {
-    modeCheck($(this).data('mode'))
     if ($(this).data('promo')) {
       setValue($(this).data('promo'), $(this).data('mode'))
     }
-    $('#promoModal').modal('show')
+    $('#addModal').modal('show')
+  });
+  
+  $("#addModal .modal-close").on("click", function(e) {
+    $('#addModal').modal('hide')
   });
 
-  $("#promoModal .modal-close").on("click", function(e) {
-    $('#promoModal').modal('hide')
-  });
-
-  const modeCheck = (mode) => {
-    switch (mode) {
-      case "detail":
-        disabled()
-        break
-      case "edit":
-        enabled()
-        $('.modal-save').text('Save')
-        break
-      case "add":
-        cleared()
-        enabled()
-        $('.modal-save').text('Add')
+  // edit
+  $(".editShowBtn").on("click", function(e) {
+    if ($(this).data('promo')) {
+      setValueEdit($(this).data('promo'))
     }
+    $('#editModal').modal('show')
+  });
+
+  $("#editModal .modal-close").on("click", function(e) {
+    $('#editModal').modal('hide')
+  });
+
+  // detail
+  $(".detailShowBtn").on("click", function(e) {
+    if ($(this).data('promo')) {
+      setValueDetail($(this).data('promo'))
+    }
+    $('#detailModal').modal('show')
+  });
+
+  $("#detailModal .modal-close").on("click", function(e) {
+    $('#detailModal').modal('hide')
+  });
+  
+  const setValueDetail = (dataEncrypt) => {
+    const data = JSON.parse(atob(dataEncrypt))
+    const date_start = data.date_start.split('T')
+    const date_end = data.date_end.split('T')
+
+    $('#detailTitle').val(data.title)
+    $('#detail_date_start').val(date_start[0])
+    $('#detail_date_end').val(date_end[0])
+    $('#detailContent').val(data.content)
+    $('#detail-image-preview').attr('src', data.image.replace('http:/', 'http://'))
+  }
+
+  const setValueEdit = (dataEncrypt) => {
+    const data = JSON.parse(atob(dataEncrypt))
+    const date_start = data.date_start.split('T')
+    const date_end = data.date_end.split('T')
+
+    $('#editTitle').val(data.title)
+    $('#edit_date_start').val(date_start[0])
+    $('#edit_date_end').val(date_end[0])
+    $('#editContent').val(data.content)
+    $('#edit-image-preview').attr('src', data.image.replace('http:/', 'http://'))
+    $('#editForm').attr('action', "{{ route('content.promo.edit'," + data.promotion_id + ") }}")
   }
 
   const setValue = (dataEncrypt, mode) => {
@@ -183,29 +312,10 @@
     $('#image-preview').attr('src', data.image.replace('http:/', 'http://'))
 
     if (mode == 'edit') {
-      $('#form').attr('action', "{{ route('content.promo.edit'," + data.promotion_id + ") }}")
+      $('#addForm').attr('action', "{{ route('content.promo.edit'," + data.promotion_id + ") }}")
     }
   }
-
-  const disabled = () => {
-    $('#title').attr('disabled', true)
-    $('#date_start').attr('disabled', true)
-    $('#date_end').attr('disabled', true)
-    $('#content').attr('disabled', true)
-    $('#image').attr('disabled', true)
-    $('.modal-save').hide()
-  }
-
-  const enabled = () => {
-    $('#title').attr('disabled', false)
-    $('#date_start').attr('disabled', false)
-    $('#date_end').attr('disabled', false)
-    $('#content').attr('disabled', false)
-    $('#image').attr('disabled', false)
-    $('#image-preview').show()
-    $('.modal-save').show()
-  }
-
+  
   const cleared = () => {
     $('#title').val('')
     $('#date_start').val('')
