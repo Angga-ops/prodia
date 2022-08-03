@@ -21,15 +21,15 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/', 'ArtikelController@index')->name('content.index');
     Route::get('/content/artikel/show/{article_id}', 'ArtikelController@show')->name('artikel.show');
     Route::get('/content/artikel/delete/{article_id}', 'ArtikelController@destroy')->name('artikel.delete');
-    Route::post('/content/artikel/tambah', 'UserController@addArticle')->name('artikel.add');
-    
+    Route::post('/content/artikel/tambah', 'ArtikelController@addArticle')->name('artikel.add');
+
     // Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
     
     //if name is PromoController itchu adalah Promo Controller
     Route::get('/content/promo', 'PromoController@index')->name('content.promo');
     Route::post('/content/promo/add', 'PromoController@add')->name('content.promo.add');
-    Route::get('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.delete');
-    Route::post('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.edit');
+    Route::get('/content/promo/{promotion_id}', 'PromoController@delete')->name('content.promo.delete');
+    Route::post('/content/promo/{promo_id}', 'PromoController@edit')->name('content.promo.edit');
     //Controller Diskusi
     Route::get('/content/diskusi', 'DiskusiController@index')->name('content.diskusi');
     //COntroller Forum

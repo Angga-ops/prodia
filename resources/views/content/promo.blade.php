@@ -50,7 +50,7 @@
                     <div class="d-flex flex-sm-column flex-md-row justify-content-center">
                       <button class="btn d-flex btn-xs btn-primary mx-1 showBtn" data-promo="{{ base64_encode(json_encode($promo['promotion_id'])) }}" data-mode="detail"><i class="fa fa-eye m-auto" aria-hidden="true"></i> &nbsp Detail</button>
                       <button class="btn d-flex btn-xs btn-success mx-1 showBtn" data-promo="{{ base64_encode(json_encode($promo['promotion_id'])) }}" data-mode="edit"><i class="fa fa-edit m-auto" aria-hidden="true"></i> &nbsp Edit</button>
-                      <button class="btn d-flex btn-xs btn-danger mx-1 deleteBtn" data-id="{{ $promo['promotion_id'] }}"><i class="fa fa-trash m-auto" aria-hidden="true"></i> &nbsp Hapus</button>
+                      <a href="{{ route('content.promo.delete', $promo['promotion_id']) }}" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Hapus</a>
                     </div>
                   </td>
                 </tr>

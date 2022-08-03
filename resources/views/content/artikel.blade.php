@@ -41,7 +41,7 @@
                           <td>
                             <a href="#"  type="button" class="btn btn-xs btn-info open_modal"   data-toggle="modal" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
                             <a href="#"  class="btn btn-xs btn-warning open_modal"  id="duar" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="{{ route('artikel.delete', $item['article_id']) }}"  id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Delete</a></td>
+                            <a href="{{ route('artikel.delete', $item['article_id']) }}"  id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Hapus</a></td>
                           </tr>  
                       @endforeach
                       @endif
@@ -98,7 +98,8 @@
           <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="artikel.add" method="post">
+        <form action="/content/artikel/tambah" method="post" enctype="multipart/form-data">
+          @csrf
           <div class="m-3">
             <label for="exampleFormControlInput1" class="form-label">Judul</label>
             <input type="text" class="form-control" name="judul" placeholder="Masukan judul" required>
@@ -113,7 +114,7 @@
           </div>
           <div class="m-3">
             <label for="#image">Foto</label>
-            <input type="file" name="foto" id="image" class="form-control" >
+            <input type="file" name="foto" class="form-control" >
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

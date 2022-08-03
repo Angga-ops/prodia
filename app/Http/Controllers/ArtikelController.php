@@ -15,12 +15,26 @@ class ArtikelController extends Controller
         ])->get($this->baseUrl);
         $response = $request->getBody()->getContents();
         $data = json_decode($response,true);
-        
         return View::make('content.artikel')->with(compact('data'));
     }
 
-    public function addArticle(){
-
+    public function addArticle(Request $request){
+        
+        $addArticle =  Http::withHeaders([
+            'Accept' =>  'application/json',
+            'Authorization' => ' Bearer '. session('token'),
+        ])->attach('file',file_get_contents($request->file('foto')))->
+        post($this->baseUrl,[
+            'title' => $request->judul,
+            'content' => $request->konten,
+            'publish_date' => $request->tgl_publish
+        ]);
+        $response = json_decode($addArticle->getBody()->getContents(),true);
+        if($response['success']){
+            return redirect()->back()
+                        ->with('success',$response['message']);
+        }
+        
     }
     public function destroy($article_id){
         $request = Http::withHeaders([

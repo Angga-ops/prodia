@@ -47,10 +47,12 @@ class PromoController extends Controller
         // storage_path('app/').$path
         // dd(file_get_contents($request->file('image')->getPathname()));
         $path = $request->file('image')->store('images');
+    
         $requestApi = Http::withHeaders([
             'Accept' =>  'application/json',
             'Authorization' => ' Bearer '. session('token'),
-        ])->attach('image',file_get_contents($request->file('image')))->post($this->base_url,[
+        ])->attach('image',file_get_contents($request->file('image')))->
+            post($this->base_url,[
             'title' => $request->title,
             'content' => $request->content,
             'end_date' => $request->date_start,
