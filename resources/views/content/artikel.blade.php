@@ -13,10 +13,9 @@
                         </div>
                       </div>
                         @endif
-                      
                       <div class="d-flex flex-row justify-content-between items-center">
                         <h5>Artikel</h6>
-                        <button class="btn d-flex btn-md btn-primary mx-1 showBtn" data-mode="add"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</button>
+                        <button class="btn d-flex btn-md btn-primary mx-1" type="button" data-bs-toggle="modal" data-bs-target="#modalAdd"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</button>
                       </div>
                     </div>
           <div class="card-body px-0 pt-0 pb-2">
@@ -32,16 +31,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @if (isset($data) && isset($data['data']))
-                      @foreach ($data['data']['fb'] as $key=>$item)
+                      @if (isset($data) && isset($data['articles']))
+                      @foreach ($data['articles'] as $key=>$item)
                       <tr>
                         <td class="text-center"><img src="{{ str_replace('http:/','http://',$item['image']) }}" class="avatar avatar-sm me-3" ></td>
                           <td>{{ $item['title'] }}</td>
                           <td>{{ $item['name'] }}</td>
                           <td>{{ $item['publish_date'] }}</td>
                           <td>
-                            <a href="#"  type="button" class="btn btn-xs btn-info open_modal"   data-toggle="modal" data-artikel="{{ base64_encode(json_encode($data['data']['fb'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
-                            <a href="#"  class="btn btn-xs btn-warning open_modal"  id="duar" data-artikel="{{ base64_encode(json_encode($data['data']['fb'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
+                            <a href="#"  type="button" class="btn btn-xs btn-info open_modal"   data-toggle="modal" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
+                            <a href="#"  class="btn btn-xs btn-warning open_modal"  id="duar" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
                             <a href="{{ route('artikel.delete', $item['article_id']) }}"  id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Delete</a></td>
                           </tr>  
                       @endforeach
@@ -89,6 +88,39 @@
           <button type="button" class="btn btn-primary modal-save">Save</button>
         </div>
       </div>
+    </div>
+  </div>
+  <!--Modal tambah-->
+  <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="artikel.add" method="post">
+          <div class="m-3">
+            <label for="exampleFormControlInput1" class="form-label">Judul</label>
+            <input type="text" class="form-control" name="judul" placeholder="Masukan judul" required>
+          </div>
+          <div class="m-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Konten</label>
+            <textarea class="form-control" name="konten" placeholder="Masukan" rows="3" required></textarea>
+          </div>
+          <div class="m-3">
+              <label for="exampleFormControlInput1" class="form-label">Tanggal Pubish</label>
+              <input type="date" class="form-control" name="tgl_publish" placeholder="Masukan judul" required>
+          </div>
+          <div class="m-3">
+            <label for="#image">Foto</label>
+            <input type="file" name="foto" id="image" class="form-control" >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+          </div>
+        </form>
+        </div>
     </div>
   </div>
 @endsection

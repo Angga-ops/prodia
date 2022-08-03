@@ -17,11 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth_granted'])->group(function(){
     // Route::get('/', 'AdminController@Dashboard')->name('Dashboard');
     // Route::get('/content/dashboard', 'AdminController@Dashboard');
-    //if name is NewsController itchu adalah News Controller
+    //if name is ArtikelController itchu adalah menu Artikel 
     Route::get('/', 'ArtikelController@index')->name('content.index');
     Route::get('/content/artikel/show/{article_id}', 'ArtikelController@show')->name('artikel.show');
     Route::get('/content/artikel/delete/{article_id}', 'ArtikelController@destroy')->name('artikel.delete');
-    Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
+    Route::post('/content/artikel/tambah', 'UserController@addArticle')->name('artikel.add');
+    
+    // Route::get('/content/artikel/datatables', 'ArtikelController@datatables')->name('content.datatables');
+    
     //if name is PromoController itchu adalah Promo Controller
     Route::get('/content/promo', 'PromoController@index')->name('content.promo');
     Route::post('/content/promo/add', 'PromoController@add')->name('content.promo.add');

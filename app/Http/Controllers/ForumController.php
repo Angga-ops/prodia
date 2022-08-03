@@ -83,7 +83,6 @@ class ForumController extends Controller
         ])->delete($this->base_forum.'/reply/masterdelete');
         $response = $deleteReply->getStatusCode();
         $data = json_decode($deleteReply->getBody(),true);
-        
         if($data['success']){
             return redirect()->back()
                         ->with('success',$data['message']);
