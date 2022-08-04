@@ -19,7 +19,9 @@
   <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
   <!--DataTables-->
   <link href="{{ asset('assets/css/dataTable.min.css') }}" rel="stylesheet" />
-  <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBApcKgdpuAekmrSd-VAKK4PrbRsOJRNrE&callback=initMap">></script>
+  <link rel="stylesheet" href="{{ asset('assets/js/leaflet/leaflet.css') }}">
+  <script src="{{ asset('assets/js/leaflet/leaflet.js') }}"></script>
+  {{-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBApcKgdpuAekmrSd-VAKK4PrbRsOJRNrE&callback=initMap">></script> --}}
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 

@@ -44,6 +44,7 @@ class PromoController extends Controller
 
     public function add(Request $request)
     {
+        
         if ($request->file('image') != null) {
             $requestApi = Http::withToken(session('token'))
             ->send('POST',$this->base_url,[
@@ -86,14 +87,13 @@ class PromoController extends Controller
     
     public function edit(Request $request,$promo_id)
     {
+        // dd($request);
         if ($request->file('image') != null) {
-            $requestApi = Http::withToken(session('token'))
-            ->withOptions([
+            $requestApi = Http::withToken(session('token'))->withOptions([
                 'query' => [
                     'promotion_id' => $promo_id 
                 ]
-            ])
-            ->send('PUT',$this->base_url,[
+            ])->send('PUT',$this->base_url,[
                 'multipart' => [
                     [
                         'name' => 'file',
@@ -119,9 +119,9 @@ class PromoController extends Controller
             ]);
             $response = json_decode($requestApi->getBody()->getContents(),true);
             if ($response['success']) {
-                return redirect('/content/promo')->with('success',$response['message']);
+                return redirect()->back()->with('success',$response['message']);
             }
-            return redirect('/content/promo')->with('error',$response['message']);
+            return redirect()->back()->with('error',$response['message']);
         }    
         $requestApi = Http::withToken(session('token'))->withOptions([
             'query' => [
@@ -134,7 +134,10 @@ class PromoController extends Controller
             'date_start' => $request->date_end
         ]);
         $response = json_decode($requestApi->getBody()->getContents(),true);
-        return redirect('/content/promo')->with('success',$response['message']);
+        if ($response['success']) {
+            return redirect()->back()->with('success',$response['message']);
+        }
+        return redirect()->back()->with('error',$response['message']);
     }
 
 }
