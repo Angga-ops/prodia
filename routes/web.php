@@ -37,12 +37,12 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/content/forum', 'ForumController@index')->name('content.forum');
     Route::get('/form/forum/{forum_id}', 'ForumController@detail')->name('forum.detail');
     Route::post('/form/forum/detail/{forum_id}', 'ForumController@reply')->name('reply.tambah');
-
     Route::get('/forum/delete/{forum_reply_id}', 'ForumController@deleteReply')->name('delete.reply');
-
     Route::get('/form/forum/tambah/index', 'ForumController@add')->name('forum.tambah');
     Route::post('/form/forum/tambah/index', 'ForumController@post')->name('forum.post');
     Route::get('/content/forum/{forum_id}', 'ForumController@delete')->name('forum.delete');
+    //controller maps
+    Route::get('/content/maps', 'MapsController@index')->name('maps.index');
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 

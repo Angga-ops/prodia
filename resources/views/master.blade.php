@@ -19,6 +19,7 @@
   <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
   <!--DataTables-->
   <link href="{{ asset('assets/css/dataTable.min.css') }}" rel="stylesheet" />
+  <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBApcKgdpuAekmrSd-VAKK4PrbRsOJRNrE&callback=initMap">></script>
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
@@ -75,15 +76,15 @@
             </div>
             <span class="nav-link-text ms-1">Chat</span>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
-          <a class="nav-link " href="/content/forum">
+          <a class="nav-link " href="/content/maps">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-email-83 text-secondary text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Alamat Cabang</span>
+            <span class="nav-link-text ms-1">Alamat</span>
           </a>
-        </li> --}}
+        </li>
         <li class="nav-item">
           <a class="nav-link " href="/logout">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
