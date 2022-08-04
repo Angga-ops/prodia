@@ -39,7 +39,7 @@
                           <td>{{ $item['name'] }}</td>
                           <td>{{ $item['publish_date'] }}</td>
                           <td>
-                            <a href="#"  type="button" class="btn btn-xs btn-info"   data-toggle="modal" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
+                            <a href="#"  type="button" class="btn btn-xs btn-primary detail_article"   data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
                             <a href="#"  class="btn btn-xs btn-warning edit_article" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
                             <a href="{{ route('artikel.delete', $item['article_id']) }}"  id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Delete</a></td>
                           </tr>  
@@ -54,42 +54,6 @@
           </div>
         </div>
         <!-- Modal -->
-        {{-- modal show --}}
-  <div class="modal fade" id="modal" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close done" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="exampleModalLabel"></h4>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="#title">Judul</label>
-            <input type="text" class="form-control" id="title" name="title">
-          </div>
-          <div class="mb-3">
-            <label for="#title">name</label>
-            <input type="text" class="form-control" id="name" name="name">
-          </div>
-          <div class="mb-3">
-            <label for="#title">konten</label>
-            <textarea type="text" class="form-control" id="content" name="content"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="#title">Image</label>
-            <input type="file" class="form-control" id="image" name="image">
-          </div>
-          <div class="mb-3">
-            <img src="" id="image-preview" alt="" style="max-width: 25%">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default done" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary modal-save">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <!--Modal tambah-->
   <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -124,7 +88,7 @@
         </div>
     </div>
   </div>
-
+  <!--Modal edit-->
   <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -161,6 +125,40 @@
         </div>
     </div>
   </div>
+  <!--Modal Detail-->
+  <div class="modal fade" id="modalDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" id="detailModalClose" aria-label="Close"></button>
+        </div>
+        <form id="editForm" method="post" enctype="multipart/form-data">
+          @csrf
+          <div class="m-3">
+            <label for="exampleFormControlInput1" class="form-label">Judul</label>
+            <input type="text" class="form-control" name="judul" placeholder="Masukan judul" id="detailTitle" readonly>
+          </div>
+          <div class="m-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Konten</label>
+            <textarea class="form-control" name="konten" placeholder="Masukan" rows="3" id="detailContent" readonly></textarea>
+          </div>
+          <div class="m-3">
+              <label for="exampleFormControlInput1" class="form-label">Tanggal Pubish</label>
+              <input type="date" class="form-control" name="tgl_publish" placeholder="Masukan judul" id="detailPublish" readonly>
+          </div>
+          
+          <div class="m-3">
+            <img src="" id="detailImgPreview" class="w-100" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="detailClose" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+          </div>
+        </form>
+        </div>
+    </div>
+  </div>
 @endsection
 @push('scripts')
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -177,7 +175,18 @@
   $('.done').on('click',function(e){
     $('#modal').modal('hide');
   });
-
+  //Detail Modal
+  $('.detail_article').on('click', function(e) {
+    // setValueEdit(())
+    setValueEdit($(this).data('artikel'))
+    $('#modalDetail').modal('show')
+  })
+    $('#detailModalClose').on('click',function (e) {
+      $('#modalDetail').modal('hide')
+    })
+    $('#detailClose').on('click',function (e) {
+      $('#modalDetail').modal('hide')
+    })
   // Edit Modal
   $('.edit_article').on('click', function(e){
     setValueEdit($(this).data('artikel'))
@@ -201,7 +210,7 @@
     $('#name').val(data.name)
     $('#editContent').val(data.content)
     $('#editPublish').val(publish_date[0])
-    $('#editImagePreview').attr('src',data.image.replace('http:/','http://'))
+    $('#editImgPreview').attr('src',data.image.replace('http:/','http://'))
   }
 
   const setValue = (dataEncrypt) => {
@@ -209,11 +218,11 @@
     console.log(data)
     const publish_date = data.publish_date.split('T')
 
-    $('#title').val(data.title)
+    $('#detailTitle').val(data.title)
     $('#name').val(data.name)
-    $('#content').val(data.content)
-    $('#publish_date').val(publish_date[0])
-    $('#image-preview').attr('src',data.image.replace('http:/','http://'))
+    $('#detailContent').val(data.content)
+    $('#detailPublish').val(publish_date[0])
+    $('#detailImgPreview').attr('src',data.image.replace('http:/','http://'))
   }
   const disabled =()=>
   {
