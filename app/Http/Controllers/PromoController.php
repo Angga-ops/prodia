@@ -76,8 +76,8 @@ class PromoController extends Controller
         $requestApi = Http::withToken(session('token'))->post($this->base_url,[
             'title' => $request->title,
             'content' => $request->content,
-            'date_end' => $request->date_start,
-            'date_start' => $request->date_end
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end
         ]);
         $response = json_decode($requestApi->getBody()->getContents(),true);
         return redirect('/content/promo')->with('success',$response['message']);
@@ -118,13 +118,16 @@ class PromoController extends Controller
                 ]
             ]);
             $response = json_decode($requestApi->getBody()->getContents(),true);
-            dd($response);
             if ($response['success']) {
                 return redirect('/content/promo')->with('success',$response['message']);
             }
             return redirect('/content/promo')->with('error',$response['message']);
         }    
-        $requestApi = Http::withToken(session('token'))->post($this->base_url,[
+        $requestApi = Http::withToken(session('token'))->withOptions([
+            'query' => [
+                'promotion_id' => $promo_id 
+            ]
+        ])->put($this->base_url,[
             'title' => $request->title,
             'content' => $request->content,
             'date_end' => $request->date_start,
