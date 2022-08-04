@@ -1,27 +1,7 @@
 @extends('../master')
 
 @section('konten')
-<script>
-    function initialize() {
-  var propertiPeta = {
-    center:new google.maps.LatLng(-8.5830695,116.3202515),
-    zoom:9,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  
-  var peta = new google.maps.Map(document.getElementById("googleMap"), propertiPeta);
-  
-  // membuat Marker
-  var marker=new google.maps.Marker({
-      position: new google.maps.LatLng(-8.5830695,116.3202515),
-      map: peta
-  });
 
-}
-
-// event jendela di-load  
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -40,6 +20,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
         </div>
     </div>
 @endsection
-@push('script')
+@push('scripts')
+<script>
+    var map = L.map('googleMap').setView([-6.200000, 106.816666], 5);
 
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+
+map.on('click', (e)=>{
+    alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+  });
+</script>
 @endpush

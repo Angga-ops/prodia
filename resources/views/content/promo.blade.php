@@ -77,25 +77,25 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="#title">Judul</label>
-            <input type="text" class="form-control" id="title" name="title" />
+            <input type="text" class="form-control" id="title" name="title" required/>
           </div>
           <div class="mb-3">
             <label for="#date_start">Tanggal Mulai</label>
-            <input type="date" name="date_start" id="date_start" class="form-control" />
+            <input type="date" name="date_start" id="date_start" class="form-control" required/>
           </div>
           <div class="mb-3">
             <label for="#date_end">Tanggal Akhir</label>
-            <input type="date" name="date_end" id="date_end" class="form-control" />
+            <input type="date" name="date_end" id="date_end" class="form-control" required/>
           </div>
           <div class="mb-3">
             <label for="#content">Konten</label>
-            <textarea name="content" id="content" class="form-control" rows="5"></textarea>
+            <textarea name="content" id="content" class="form-control" rows="5" required></textarea>
           </div>
           <div class="mb-3">
             <div class="d-flex flex-column">
               <div class="flex-shrink-1">
                 <label for="#image">Foto</label>
-                <input type="file" name="image" id="image" class="form-control">
+                <input type="file" name="image" id="image" class="form-control" required>
               </div>
               <div class="flex-shrink-1 p-2" style="max-width: 50%;">
                 <img class="w-100" id="image-preview" />

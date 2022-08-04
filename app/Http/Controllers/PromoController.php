@@ -44,6 +44,7 @@ class PromoController extends Controller
 
     public function add(Request $request)
     {
+        
         if ($request->file('image') != null) {
             $requestApi = Http::withToken(session('token'))
             ->send('POST',$this->base_url,[
@@ -86,14 +87,13 @@ class PromoController extends Controller
     
     public function edit(Request $request,$promo_id)
     {
+        // dd($request);
         if ($request->file('image') != null) {
-            $requestApi = Http::withToken(session('token'))
-            ->withOptions([
+            $requestApi = Http::withToken(session('token'))->withOptions([
                 'query' => [
                     'promotion_id' => $promo_id 
                 ]
-            ])
-            ->send('PUT',$this->base_url,[
+            ])->send('PUT',$this->base_url,[
                 'multipart' => [
                     [
                         'name' => 'file',
@@ -120,18 +120,28 @@ class PromoController extends Controller
             $response = json_decode($requestApi->getBody()->getContents(),true);
             dd($response);
             if ($response['success']) {
-                return redirect('/content/promo')->with('success',$response['message']);
+                return redirect()->back()->with('success',$response['message']);
             }
-            return redirect('/content/promo')->with('error',$response['message']);
+            return redirect()->back()->with('error',$response['message']);
         }    
-        $requestApi = Http::withToken(session('token'))->post($this->base_url,[
+        $requestApi = Http::withheaders([
+            'Content-type' => 'application/json',
+            'Authorization' => 'Bearer'.session('token'),
+            ])->withOptions([
+            'query' => [
+                'promotion_id' => $promo_id 
+            ]
+        ])->put($this->base_url,[
             'title' => $request->title,
             'content' => $request->content,
             'date_end' => $request->date_start,
             'date_start' => $request->date_end
         ]);
         $response = json_decode($requestApi->getBody()->getContents(),true);
-        return redirect('/content/promo')->with('success',$response['message']);
+        if ($response['success']) {
+            return redirect()->back()->with('success',$response['message']);
+        }
+        return redirect()->back()->with('error',$response['message']);
     }
 
 }

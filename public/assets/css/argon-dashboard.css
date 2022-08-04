@@ -11158,7 +11158,7 @@ fieldset:disabled .btn {
 
 .min-height-300 {
     min-height: 300px !important;
-    background-color: #54f353;
+    background: linear-gradient(96.98deg, #2DDB2C 8.81%, #178917 110.54%);
 }
 
 .min-height-400 {
