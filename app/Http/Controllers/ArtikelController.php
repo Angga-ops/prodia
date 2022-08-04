@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use GuzzleHttp\Psr7\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -10,60 +12,81 @@ class ArtikelController extends Controller
 {
     private $baseUrl =  'http://103.214.53.148:51999/v1/article';
     public function index(Request $request){
-        $request = Http::withHeaders([
-            'Content-type' =>  'application/json',
-            'Authorization' => ' Bearer '.session('token'),
-        ])->get($this->baseUrl);
+        $request = Http::withToken(session('token'))->get($this->baseUrl);
         $response = $request->getBody()->getContents();
         $data = json_decode($response,true);
-        return View::make('content.artikel')->with(compact('data'));
+        $cr = new Carbon();
+        $cr::setLocale('id');
+        return View::make('content.artikel',[
+            'data' => $data,
+            'carbon' => $cr
+        ]);
     }
 
     public function addArticle(Request $request){
-        
-        $addArticle =  Http::withHeaders([
-            'Accept' =>  'application/json',
-            'Authorization' => ' Bearer '. session('token'),
-        ])->attach('file',file_get_contents($request->file('foto')))->
-        post($this->baseUrl,[
-            'title' => $request->judul,
-            'content' => $request->konten,
-            'publish_date' => $request->tgl_publish
+        $addArticle =  Http::withToken(session('token'))
+        ->acceptJson()
+        ->send('POST',$this->baseUrl,[
+            'multipart' => [
+                [
+                    'name' => 'file',
+                    'contents' => Utils::tryFopen($request->file('foto')->getRealPath(),'r')
+                ],
+                [
+                    'name' => 'title',
+                    'contents' => $request->judul
+                ],
+                [
+                    'name' => 'content',
+                    'contents' => $request->konten
+                ],
+                [
+                    'name' => 'publish_date',
+                    'contents' => $request->tgl_publish
+                ]
+            ]
         ]);
         $response = json_decode($addArticle->getBody()->getContents(),true);
         if($response['success']){
-            return redirect()->back()
-                        ->with('success',$response['message']);
+            return redirect()->back()->with('success',$response['message']);
         }
         
     }
 
     public function editArticle(Request $request,$article_id)
     {
-        // dd($article_id);
-        // $path = $request->file('foto')->store('images');
-        // if ($request->file('foto') != null) {
-        //     $requestApi = Http::withHeaders([
-        //         'Accept' => 'application/json',
-        //         'Content-Type' => 'multipart/form-data',
-        //         'Authorization' => ' Bearer '.session('token'),
-        //     ])->withOptions([
-        //         'query' => [
-        //             'article_id' => $article_id
-        //         ]
-        //     ])->put($this->baseUrl,[
-        //         'title' => $request->judul,
-        //         'content' => $request->konten,
-        //         'publish_date' => $request->tgl_publish,
-        //         'file' => $request->file('foto')
-        //     ]);
-        //     $response = $requestApi->getBody()->getContents();
-        //     $data = json_decode($response,true);
-        //     if ($data['success']) {
-        //         return redirect()->back()->with('success',$data['message']);
-        //     }
-        //     return redirect()->back()->with('error',$data['message']);
-        // }
+        if ($request->file('foto') != null) {
+            $requestApi = Http::withToken(session('token'))->acceptJson()->withOptions([
+                'query' => [
+                    'article_id' => $article_id
+                ],
+            ])->send('PUT',$this->baseUrl,[
+                'multipart' => [
+                    [
+                        'name' => 'file',
+                        'contents' => Utils::tryFopen($request->file('foto')->getRealPath(),'r')
+                    ],
+                    [
+                        'name' => 'title',
+                        'contents' => $request->judul
+                    ],
+                    [
+                        'name' => 'content',
+                        'contents' => $request->konten
+                    ],
+                    [
+                        'name' => 'publish_date',
+                        'contents' => $request->tgl_publish
+                    ]
+                ]
+            ]);
+            $response = $requestApi->getBody()->getContents();
+            $data = json_decode($response,true);
+            if ($data['success']) {
+                return redirect()->back()->with('success',$data['message']);
+            }
+            return redirect()->back()->with('error',$data['message']);
+        }
         $requestApi = Http::withHeaders([
             'Content-type' =>  'application/json',
             'Authorization' => ' Bearer '.session('token'),

@@ -29,7 +29,7 @@ Route::middleware(['auth_granted'])->group(function(){
     //if name is PromoController itchu adalah Promo Controller
     Route::get('/content/promo', 'PromoController@index')->name('content.promo');
     Route::post('/content/promo/add', 'PromoController@add')->name('content.promo.add');
-    Route::get('/content/promo/{promotion_id}', 'PromoController@delete')->name('content.promo.delete');
+    Route::get('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.delete');
     Route::post('/content/promo/{promo_id}', 'PromoController@edit')->name('content.promo.edit');
     //Controller Diskusi
     Route::get('/content/diskusi', 'DiskusiController@index')->name('content.diskusi');
