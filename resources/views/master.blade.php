@@ -68,6 +68,22 @@
             <span class="nav-link-text ms-1">Forum</span>
           </a>
         </li>
+        {{-- <li class="nav-item">
+          <a class="nav-link " href="/content/forum">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-email-83 text-secondary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Chat</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/content/forum">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-email-83 text-secondary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Alamat Cabang</span>
+          </a>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link " href="/logout">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
