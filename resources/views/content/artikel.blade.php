@@ -37,11 +37,11 @@
                         <td class="text-center"><img src="{{ str_replace('http:/','http://',$item['image']) }}" class="avatar avatar-sm me-3" ></td>
                           <td>{{ $item['title'] }}</td>
                           <td>{{ $item['name'] }}</td>
-                          <td>{{ $item['publish_date'] }}</td>
+                          <td>{{ $carbon::parse($item['publish_date'])->isoFormat("dddd, D MMMM Y") }}</td>
                           <td>
                             <a href="#"  type="button" class="btn btn-xs btn-primary detail_article"   data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
                             <a href="#"  class="btn btn-xs btn-success edit_article" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="{{ route('artikel.delete', $item['article_id']) }}"  id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Delete</a></td>
+                            <a href="#"  data-id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus_article"><i class="fa fa-trash"></i> Delete</a></td>
                           </tr>  
                       @endforeach
                       @endif
@@ -130,7 +130,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Detail Artikel</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" id="detailModalClose" aria-label="Close"></button>
         </div>
         <form id="editForm" method="post" enctype="multipart/form-data">
@@ -153,12 +153,31 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" id="detailClose" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Kirim</button>
           </div>
         </form>
         </div>
     </div>
   </div>
+  <!-- Hapus Modal -->
+  <div class="modal" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Hapus</h5>
+        <button type="button" class="close" id="hapusModalClose" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Apakah anda yakin ingin menghapus data ini?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="hapusClose" data-dismiss="modal">Close</button>
+        <a href="" id="confirm-delete" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @push('scripts')
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -178,7 +197,7 @@
   //Detail Modal
   $('.detail_article').on('click', function(e) {
     // setValueEdit(())
-    setValueEdit($(this).data('artikel'))
+    setValue($(this).data('artikel'))
     $('#modalDetail').modal('show')
   })
     $('#detailModalClose').on('click',function (e) {
@@ -198,6 +217,20 @@
   $('#editClose').on('click', function(e){
     $('#modalEdit').modal('hide')
   })
+  // Hapus Modal
+  $('.hapus_article').on('click', function(e){
+    console.log("CLICK")
+    let url = '{{ url("/content/artikel/delete") }}'
+    let id = $(this).data('id')
+    $('#hapusModal').modal('show')
+    $('#confirm-delete').attr('href',url+'/'+id)
+  })
+  $('#hapusModalClose').on('click', function(e){
+    $('#hapusModal').modal('hide')
+  })
+  $('#hapusClose').on('click', function(e){
+    $('#hapusModal').modal('hide')
+  })
 
   const setValueEdit = (dataEncrypt) => {
     const data = JSON.parse(atob(dataEncrypt))
@@ -215,7 +248,6 @@
 
   const setValue = (dataEncrypt) => {
     const data = JSON.parse(atob(dataEncrypt))
-    console.log(data)
     const publish_date = data.publish_date.split('T')
 
     $('#detailTitle').val(data.title)
@@ -224,6 +256,7 @@
     $('#detailPublish').val(publish_date[0])
     $('#detailImgPreview').attr('src',data.image.replace('http:/','http://'))
   }
+
   const disabled =()=>
   {
     $('#title').attr('disabled', true)
@@ -233,6 +266,7 @@
     $('#image').attr('disabled', true)
     $('.modal-save').hide()
   }
+
   const enable=()=>{
     $('#title').attr('disabled', false)
     $('#name').attr('disabled', false)

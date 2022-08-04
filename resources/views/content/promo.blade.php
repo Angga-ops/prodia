@@ -38,12 +38,12 @@
                   </td>
                   <td>
                   <div class="d-flex flex-column justify-content-center">
-                      <p class="mb-0 text-sm">{{ date("D, d F Y",strtotime($promo['date_start'])) }}</p>
+                      <p class="mb-0 text-sm">{{ $carbon->parse($promo['date_start'])->isoFormat('dddd, D MMMM YYYY') }}</p>
                   </div>
                   </td>
                   <td>
                     <div class="d-flex flex-column justify-content-center">
-                    <p class="mb-0 text-sm">{{ date("D, d F Y",strtotime($promo['date_end'])) }}</p>
+                    <p class="mb-0 text-sm">{{ $carbon->parse($promo['date_end'])->isoFormat('dddd, D MMMM YYYY') }}</p>
                     </div>
                   </td>
                   <td>
@@ -289,6 +289,7 @@
 
   const setValueEdit = (dataEncrypt) => {
     const data = JSON.parse(atob(dataEncrypt))
+    const url = "{{ url('/content/promo') }}"
     const date_start = data.date_start.split('T')
     const date_end = data.date_end.split('T')
 
@@ -297,7 +298,7 @@
     $('#edit_date_end').val(date_end[0])
     $('#editContent').val(data.content)
     $('#edit-image-preview').attr('src', data.image.replace('http:/', 'http://'))
-    $('#editForm').attr('action', "{{ route('content.promo.edit'," + data.promotion_id + ") }}")
+    $('#editForm').attr('action', url + '/' + data.promotion_id)
   }
 
   const setValue = (dataEncrypt, mode) => {
