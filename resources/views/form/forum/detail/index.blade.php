@@ -32,9 +32,9 @@
         </div>
     </div>
     
+    <div id="row" class="row">
     @foreach ($detail['data']['reply'] as $rep)
         
-    <div class="row">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
@@ -58,8 +58,8 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
 <!--Modal tambah data-->
 <!-- Button trigger modal -->
 
@@ -88,3 +88,12 @@
     </div>
   </div>
 @endsection
+@push('scripts')
+<script>
+var forum_refresh = () => setInterval(() => {
+        // $('#row').html('');
+        $('#row').load('{{ url("/form/forum/".request()->segments()[2])}} #row');
+    }, 1000);
+    forum_refresh() 
+</script>
+@endpush

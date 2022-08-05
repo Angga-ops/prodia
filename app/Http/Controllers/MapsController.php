@@ -9,4 +9,7 @@ class MapsController extends Controller
     public function index(){
         return view('content.maps');
     }
+    public function add(){
+        return view('form.maps.tambah.index');
+    }
 }

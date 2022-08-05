@@ -39,9 +39,12 @@
                           <td>{{ $item['name'] }}</td>
                           <td>{{ $carbon::parse($item['publish_date'])->isoFormat("dddd, D MMMM Y") }}</td>
                           <td>
-                            <a href="#"  type="button" class="btn btn-xs btn-primary detail_article"   data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
-                            <a href="#"  class="btn btn-xs btn-success edit_article" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="#"  data-id="{{ $item['article_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus_article"><i class="fa fa-trash"></i> Delete</a></td>
+                              <div class="d-flex flex-sm-column flex-md-row justify-content-center">
+                              <a href="#"  type="button" class="mx-1 btn btn-xs btn-primary detail_article"   data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="detail"><i class="fa fa-eye"></i> Detail</a>
+                              <a href="#"  class="mx-1 btn btn-xs btn-success edit_article" data-artikel="{{ base64_encode(json_encode($data['articles'][$key])) }}" data-mode="edit"><i class="fa fa-pencil"></i> Edit</a>
+                              <a href="#"  data-id="{{ $item['article_id'] }}" data-toggle="modal" class="mx-1 btn btn-danger btn-xs hapus_article"><i class="fa fa-trash"></i> Delete</a>
+                            </div>
+                          </td>
                           </tr>  
                       @endforeach
                       @endif

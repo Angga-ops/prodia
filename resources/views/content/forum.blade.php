@@ -51,9 +51,11 @@
                         <p class="text-xs text-secondary mb-0">{{ $f['replies'] }} balasan</p>
                         </td>
                         <td>
-                          <a href="{{ route('forum.detail', $f['forum_id']) }}"  type="button" class="btn btn-xs btn-info"><i class="fa fa-eye"></i> Detail</a>
-                            <a href="{{ route('forum.delete', $f['forum_id']) }}"  id="{{ $f['forum_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs hapus"><i class="fa fa-trash"></i> Delete</a></td>
-                        </td>
+                        <div class="d-flex flex-sm-column flex-md-row justify-content-center">
+                          <a href="{{ route('forum.detail', $f['forum_id']) }}"  type="button" class="btn btn-xs mx-1 btn-info"><i class="fa fa-eye"></i> Detail</a>
+                            <a href="{{ route('forum.delete', $f['forum_id']) }}"  id="{{ $f['forum_id'] }}" data-toggle="modal" class="btn btn-danger btn-xs mx-1 hapus"><i class="fa fa-trash"></i> Delete</a></td>
+</div>
+                          </td>
                       </tr>
                   @endforeach
                 </tbody>
