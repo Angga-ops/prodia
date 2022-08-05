@@ -14,7 +14,7 @@
                       </div>
                         @endif
                       <div class="d-flex flex-row justify-content-between items-center">
-                        <h5>Artikel</h6>
+                        <h5>Berita</h6>
                         <button class="btn d-flex btn-md btn-primary mx-1" type="button" data-bs-toggle="modal" data-bs-target="#modalAdd"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</button>
                       </div>
                     </div>
@@ -62,7 +62,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ubah Artikel</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ubah Berita</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="/content/artikel/tambah" method="post" enctype="multipart/form-data">
@@ -96,7 +96,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Berita</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" id="editModalClose" aria-label="Close"></button>
         </div>
         <form id="editForm" method="post" enctype="multipart/form-data">
@@ -133,7 +133,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Detail Artikel</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Detail Berita</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" id="detailModalClose" aria-label="Close"></button>
         </div>
         <form id="editForm" method="post" enctype="multipart/form-data">
