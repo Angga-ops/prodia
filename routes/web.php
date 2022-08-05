@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Events\ServerChat;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +43,13 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/content/forum/{forum_id}', 'ForumController@delete')->name('forum.delete');
     //controller maps
     Route::get('/content/maps', 'MapsController@index')->name('maps.index');
+
+    //chat
+    Route::get('/test-broadcast-event', function () {
+        ServerChat::dispatch();
+        
+        echo 'test broadcast event sangcahaya.id';
+    });
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 

@@ -59,7 +59,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ubah Artikel</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Artikel</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="/content/artikel/tambah" method="post" enctype="multipart/form-data">
@@ -70,7 +70,7 @@
           </div>
           <div class="m-3">
             <label for="exampleFormControlTextarea1" class="form-label">Konten</label>
-            <textarea class="form-control" name="konten" placeholder="Masukan" rows="3" required></textarea>
+            <textarea class="form-control konten" name="konten" placeholder="Masukan" rows="3" required></textarea>
           </div>
           <div class="m-3">
               <label for="exampleFormControlInput1" class="form-label">Tanggal Pubish</label>
@@ -104,7 +104,7 @@
           </div>
           <div class="m-3">
             <label for="exampleFormControlTextarea1" class="form-label">Konten</label>
-            <textarea class="form-control" name="konten" placeholder="Masukan" rows="3" id="editContent" required></textarea>
+            <textarea class="form-control konten" name="konten" placeholder="Masukan" rows="3" id="editContent" required></textarea>
           </div>
           <div class="m-3">
               <label for="exampleFormControlInput1" class="form-label">Tanggal Pubish</label>
@@ -141,7 +141,7 @@
           </div>
           <div class="m-3">
             <label for="exampleFormControlTextarea1" class="form-label">Konten</label>
-            <textarea class="form-control" name="konten" placeholder="Masukan" rows="3" id="detailContent" readonly></textarea>
+            <textarea class="form-control konten" name="konten" placeholder="Masukan" rows="3" id="detailContent" readonly></textarea>
           </div>
           <div class="m-3">
               <label for="exampleFormControlInput1" class="form-label">Tanggal Pubish</label>
@@ -180,8 +180,18 @@
 </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script>
+<script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script>
+    $(document).ready(() => {
+      // console.log(tinymce)
+      tinymce.init({
+        selector: '.konten', // Replace this CSS selector to match the placeholder element for TinyMCE
+        plugins: 'code table lists',
+        toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+      });
+    })
+
     $('.open_modal').on('click',function(e){
       if($(this).data('mode')=='detail'){
         disabled()
