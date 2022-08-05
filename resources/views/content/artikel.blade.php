@@ -62,7 +62,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ubah Berita</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Berita</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="/content/artikel/tambah" method="post" enctype="multipart/form-data">
@@ -96,7 +96,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Berita</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ubah Berita</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" id="editModalClose" aria-label="Close"></button>
         </div>
         <form id="editForm" method="post" enctype="multipart/form-data">
