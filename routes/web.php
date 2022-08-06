@@ -45,11 +45,12 @@ Route::middleware(['auth_granted'])->group(function(){
     //controller maps
     Route::get('/content/maps', 'MapsController@index')->name('maps.index');
     Route::get('/content/maps/tambah', 'MapsController@add')->name('maps.tambah');
+    Route::get('/content/maps/tambah', 'MapsController@store')->name('maps.store');
 
     Route::get('/test-broadcast-event', function () {
         ServerChat::dispatch("duaaar jeduaar deer geeer");
         
-        echo 'test broadcast event sangcahaya.id';
+        echo 'test broadcast event angga';
     });
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });
