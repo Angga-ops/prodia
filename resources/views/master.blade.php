@@ -10,6 +10,7 @@
   <!--font and icon-->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
+  <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
@@ -21,7 +22,7 @@
   <link href="{{ asset('assets/css/dataTable.min.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="{{ asset('assets/js/leaflet/leaflet.css') }}">
   <script src="{{ asset('assets/js/leaflet/leaflet.js') }}"></script>
-  {{-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBApcKgdpuAekmrSd-VAKK4PrbRsOJRNrE&callback=initMap">></script> --}}
+  <!-- {{-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBApcKgdpuAekmrSd-VAKK4PrbRsOJRNrE&callback=initMap">></script> --}} -->
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
@@ -52,7 +53,7 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Artikel</span>
+            <span class="nav-link-text ms-1">Berita</span>
           </a>
         </li>
         <li class="nav-item">
@@ -82,7 +83,7 @@
         <li class="nav-item">
           <a class="nav-link " href="/content/maps">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-email-83 text-secondary text-sm opacity-10"></i>
+              <i class="fa fa-map-marker text-secondary text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Alamat</span>
           </a>
@@ -250,6 +251,8 @@
 
 
   <script>
+    
+
     var win = navigator.platform.indexOf("Win") > -1;
     if (win && document.querySelector("#sidenav-scrollbar")) {
       var options = {

@@ -23,26 +23,26 @@
                         </div>
                     </div>
                     @endif
-                  <h4 class="font-weight-bolder">Sign In</h4>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <h4 class="font-weight-bolder">Masuk</h4>
+                  <p class="mb-0">Silahkan masukkan Email dan Kata Sandi</p>
                 </div>
                 <div class="card-body">
                   <form role="form" method="post">
                     @csrf
                     <div class="mb-3">
-                      <input type="email" name="email" class="form-control form-control-lg" placeholder="Username" value="{{ old('email') }}" aria-label="Email">
+                      <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" value="{{ old('email') }}" aria-label="Email">
                       @error('email')
                       <small class="text-danger">{{ $message }}</small>
                       @enderror
                     </div>
                     <div class="mb-3">
-                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Kata Sandi" aria-label="Password">
                       @error('password')
                       <small class="text-danger">{{ $message }}</small>
                       @enderror
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-lg btn-persadia btn-lg w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn-persadia btn btn-lg w-100 mt-4 mb-0" style="background: linear-gradient(96.98deg, #2DDB2C 8.81%, #178917 110.54%) !important;" onmouseover="this.style.background = 'linear-gradient(96.98deg, #FFF 8.81%, gray 110.54%)'" onmouseout="this.style.background = 'linear-gradient(96.98deg, #2DDB2C 8.81%, #178917 110.54%)'">Masuk</button>
                     </div>
                   </form>
                 </div>

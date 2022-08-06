@@ -31,6 +31,6 @@ class ServerChat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('Pesan');
+
     }
 }

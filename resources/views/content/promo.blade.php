@@ -97,7 +97,7 @@
                 <label for="#image">Foto</label>
                 <input type="file" name="image" id="image" class="form-control" required>
               </div>
-              <div class="flex-shrink-1 p-2" style="max-width: 50%;">
+              <div class="flex-shrink-1 p-2" style="max-width: 100%;">
                 <img class="w-100" id="image-preview" />
               </div>
             </div>
@@ -146,7 +146,7 @@
                 <label for="#image">Foto</label>
                 <input type="file" name="image" id="detailImage" class="form-control" disabled>
               </div>
-              <div class="flex-shrink-1 p-2" style="max-width: 50%;">
+              <div class="flex-shrink-1 p-2" style="max-width: 100%;">
                 <img class="w-100" id="detail-image-preview" />
               </div>
             </div>
@@ -194,7 +194,7 @@
                 <label for="#image">Foto</label>
                 <input type="file" name="image" id="editImage" class="form-control">
               </div>
-              <div class="flex-shrink-1 p-2" style="max-width: 50%;">
+              <div class="flex-shrink-1 p-2" style="max-width: 100%;">
                 <img class="w-100" id="edit-image-preview" />
               </div>
             </div>

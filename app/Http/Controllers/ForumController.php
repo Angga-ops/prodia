@@ -106,4 +106,24 @@ class ForumController extends Controller
                         ->with('success',$data['message']);
         }
     }
+
+    public function data($forum_id)
+    {
+        $request = Http::withHeaders([
+            'Accept' =>  'application/json',
+            'Authorization' => ' Bearer '.session('token'),
+        ])->withOptions([
+            'query' => [
+                'forum_id' => $forum_id
+            ]
+        ])->get($this->base_forum.'/reply');
+        $response = $request->getBody()->getContents();
+        $detail['data'] = json_decode($response,true);
+
+        // dd($response);
+        if ($detail['success']) {
+            return json_encode($detail['data']);
+        }
+        return json_encode([]);
+    }
 }

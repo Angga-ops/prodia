@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Events\ServerChat;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,15 +41,13 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/form/forum/tambah/index', 'ForumController@add')->name('forum.tambah');
     Route::post('/form/forum/tambah/index', 'ForumController@post')->name('forum.post');
     Route::get('/content/forum/{forum_id}', 'ForumController@delete')->name('forum.delete');
+    Route::get('/form/forum/data/{forum_id}', 'ForumController@data')->name('forum.data');
     //controller maps
     Route::get('/content/maps', 'MapsController@index')->name('maps.index');
 
-    //chat
-    Route::get('/test-broadcast-event', function () {
-        ServerChat::dispatch();
-        
-        echo 'test broadcast event sangcahaya.id';
-    });
+    Route::get('/content/maps/tambah', 'MapsController@add')->name('maps.tambah');
+    Route::get('/content/maps/tambah', 'MapsController@store')->name('maps.store');
+
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });
 
