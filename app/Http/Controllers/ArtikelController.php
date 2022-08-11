@@ -46,7 +46,10 @@ class ArtikelController extends Controller
             return DataTables::of($result)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                '<div class="d-flex flex-sm-column flex-md-row justify-content-center">';
+                $btn = '<a href="javascript:void(0)" class="btn btn-xs mx-1 btn-info">Sunting</a>';
+                $btn = $btn.'<a href="javascript:void(0)" class="btn btn-danger btn-xs mx-1" onClick="openDelete(\''. base64_encode($row['article_id']) .'\')">Hapus</a>';
+                '</div>';
                 return $btn;
             })
             ->rawColumns(['action'])

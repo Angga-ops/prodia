@@ -19,7 +19,7 @@ Route::middleware(['auth_granted'])->group(function(){
     // Route::get('/content/dashboard', 'AdminController@Dashboard');
     //if name is ArtikelController itchu adalah menu Artikel 
     Route::get('/', 'ArtikelController@index')->name('content.index');
-    Route::get('/test', 'ArtikelController@test')->name('content.test');
+    Route::get('/content/artikel/tables', 'ArtikelController@test')->name('artikel.tables');
     Route::get('/content/artikel/show/{article_id}', 'ArtikelController@show')->name('artikel.show');
     Route::get('/content/artikel/delete/{article_id}', 'ArtikelController@destroy')->name('artikel.delete');
     Route::post('/content/artikel/tambah', 'ArtikelController@addArticle')->name('artikel.add');
