@@ -12,7 +12,8 @@ class MapsController extends Controller
     public function add(){
         return view('form.maps.tambah.index');
     }
-    public function store(){
+    public function test(){
+        return view('form.maps.tambah.tesmap');
 
     }
 }

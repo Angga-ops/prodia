@@ -19,9 +19,18 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
   <!--DataTables-->
-  <link href="{{ asset('assets/css/dataTable.min.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="{{ asset('assets/js/leaflet/leaflet.css') }}">
+  
   <script src="{{ asset('assets/js/leaflet/leaflet.js') }}"></script>
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet-geosearch@3.6.1/dist/geosearch.css"/>
+  
+ {{-- <!-- DataTables -->
+ <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+ <!-- Bootstrap JavaScript -->
+ <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> --}}
   <!-- {{-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBApcKgdpuAekmrSd-VAKK4PrbRsOJRNrE&callback=initMap">></script> --}} -->
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
@@ -132,7 +141,7 @@
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder text-white mb-0"></h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           {{-- <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -140,14 +149,14 @@
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input type="text" class="form-control" placeholder="Type here..." />
             </div>
-          </div>
+          </div> --}}
           <ul class="navbar-nav justify-content-end">
-            <li class="nav-item d-flex align-items-center">
+            {{-- <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign In</span>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -157,7 +166,7 @@
                 </div>
               </a>
             </li>
-            <li class="nav-item px-3 d-flex align-items-center">
+             {{-- <li class="nav-item px-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
@@ -226,9 +235,9 @@
                       </div>
                     </div>
                   </a>
-                </li> --}}
+                </li>
               </ul>
-            </li>
+            </li> --}}
           </ul>
         </li>
       </ul>
@@ -238,16 +247,22 @@
 <!-- End Navbar -->
 @yield('konten')
 </main>
+<script src="{{ asset('assets/js/jquery.min.js') }}" ></script>
+<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script> --}}
+
 <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-@stack('scripts')
-    
-    
+<script src="{{ asset('assets/js/moment.js') }}"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script> --}}
+<script src="https://unpkg.com/leaflet-geosearch@3.6.1/dist/geosearch.umd.js"></script>
 
+
+@stack('scripts')
 
 
   <script>

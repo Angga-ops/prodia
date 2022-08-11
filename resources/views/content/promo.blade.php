@@ -12,20 +12,18 @@
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0 ">
-            <table class="table align-items-center mb-0 w-100">
+          <div class="table-responsive p-0 mx-2">
+            <table class="align-items-center justify-content-center mb-0 w-100 tables">
               <thead>
                 <tr>
-                  
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Mulai</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Akhir</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($data['promotion'] as $promo)
+                {{-- @foreach ($data['promotion'] as $promo)
                     
                 <tr>
                   <td class="text-center">
@@ -54,7 +52,7 @@
                     </div>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
               </tbody>
             </table>
           </div>
@@ -63,6 +61,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -231,6 +230,30 @@
 @endsection
 @push('scripts')
 <script>
+  moment.locale('id');
+  $('.tables').DataTable({
+   processing: true,
+   serverSide: true,
+   columnDefs: [{
+      targets: 2,
+      render: $.fn.dataTable.render.moment( 'YYYY-MM-DDTH:m:s.000Z', 'D/M/YYYY', 'id' ),
+    },
+    {
+      targets: 1,
+      render: $.fn.dataTable.render.moment( 'YYYY-MM-DDTH:m:s.000Z', 'D/M/YYYY', 'id' ),
+    }
+  ],
+  orderable:false, 
+  "searching": false,
+   ajax: "{!! route('content.promos') !!}",
+   columns: [
+     {data: 'title', name: 'judul',},
+     {data: 'date_start', name: 'date_start'},
+     {data: 'date_end', name: 'date_end'},
+     {data: 'action', name: 'action',},
+   ]
+ });
+
   $(".deleteBtn").on("click", function(e) {
     $('#confirm-delete').attr('href', $('#confirm-delete').attr('href') + '/' + $(this).data('id'))
     $('#hapusModal').modal('show')

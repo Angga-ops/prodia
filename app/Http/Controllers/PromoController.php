@@ -14,6 +14,18 @@ class PromoController extends Controller
 
     public function index(Request $request){
 
+        // $request = Http::withToken(session('token'))->get($this->base_url);
+        //     $response = $request->getBody()->getContents();
+        //     $data = json_decode($response,true);
+        //     return DataTables::of($data['promotion'])
+        //     ->addIndexColumn()
+        //     ->addColumn('action', function($row){
+        //         $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+        //         return $btn;
+        //     })
+        //     ->rawColumns(['action'])
+        //     ->make(true);
+
         $request = Http::withHeaders([
             'Content-type' =>  'application/json',
             'Authorization' => ' Bearer '. session('token'),
@@ -28,8 +40,28 @@ class PromoController extends Controller
         ]);
     }
 
+    public function tables()
+    {
+        $request = Http::withToken(session('token'))->get($this->base_url);
+            $response = $request->getBody()->getContents();
+            $data = json_decode($response,true);
+
+            return DataTables::of($data['promotion'])
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                '<div class="d-flex flex-sm-column flex-md-row justify-content-center">';
+                $btn = '<a href="javascript:void(0)" class="btn btn-xs mx-1 btn-info">Sunting</a>';
+                $btn = $btn.'<a href="javascript:void(0)" class="btn btn-danger btn-xs mx-1">Hapus</a>';
+                '</div>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
     public function delete($promo_id)
     {
+        
         $request = Http::withHeaders([
             'Content-type' =>  'application/json',
             'Authorization' => ' Bearer '. session('token'),
@@ -41,7 +73,20 @@ class PromoController extends Controller
         $response = json_decode($request->getBody()->getContents(),true);
         return redirect()->back()->with('success',$response['message']);
     }
-
+    public function datatable(){
+        $request = Http::withToken(session('token'))->get($this->baseUrl);
+            $response = $request->getBody()->getContents();
+            $data = json_decode($response,true);
+            dd($data);
+            return DataTables::of($result)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
     public function add(Request $request)
     {
         

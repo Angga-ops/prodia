@@ -20,7 +20,7 @@
                     </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-                <table class="table align-items-center justify-content-center data" width="100%">
+                <table class="table align-items-center justify-content-center data data-table" width="100%">
                     <thead>
                         <tr>
                             <th></th>
@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @if (isset($data) && isset($data['articles']))
+                      {{-- @if (isset($data) && isset($data['articles']))
                       @foreach ($data['articles'] as $key=>$item)
                       <tr>
                         <td class="text-center"><img src="{{ str_replace('http:/','http://',$item['image']) }}" class="avatar avatar-sm me-3" ></td>
@@ -47,7 +47,7 @@
                           </td>
                           </tr>  
                       @endforeach
-                      @endif
+                      @endif --}}
                     </tbody>
                   </table>
                 </div>
@@ -184,7 +184,7 @@
 @endsection
 @push('scripts')
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
 <script>
     $(document).ready(() => {
       // console.log(tinymce)
@@ -289,5 +289,18 @@
     $('.modal-save').show()
     $('#image-preview').hide()
   }
+$(function () {
+  $('.data-table').DataTable({
+   processing: true,
+   serverSide: true,
+   ajax: "{!! route('content.index') !!}",
+   columns: [
+     {data: 'title', name: 'title'},
+     {data: 'name', name: 'name'},
+     {data: 'publish_date', name: 'publish_date'},
+     {data: 'action', name: 'action', orderable:false, searchable:false},
+   ]
+ });
+})
 </script>
 @endpush

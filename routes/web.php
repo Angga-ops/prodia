@@ -19,6 +19,7 @@ Route::middleware(['auth_granted'])->group(function(){
     // Route::get('/content/dashboard', 'AdminController@Dashboard');
     //if name is ArtikelController itchu adalah menu Artikel 
     Route::get('/', 'ArtikelController@index')->name('content.index');
+    Route::get('/test', 'ArtikelController@test')->name('content.test');
     Route::get('/content/artikel/show/{article_id}', 'ArtikelController@show')->name('artikel.show');
     Route::get('/content/artikel/delete/{article_id}', 'ArtikelController@destroy')->name('artikel.delete');
     Route::post('/content/artikel/tambah', 'ArtikelController@addArticle')->name('artikel.add');
@@ -28,9 +29,11 @@ Route::middleware(['auth_granted'])->group(function(){
     
     //if name is PromoController itchu adalah Promo Controller
     Route::get('/content/promo', 'PromoController@index')->name('content.promo');
+    Route::get('/content/promo/tables', 'PromoController@tables')->name('content.promos');
     Route::post('/content/promo/add', 'PromoController@add')->name('content.promo.add');
     Route::get('/content/promo/{promo_id}', 'PromoController@delete')->name('content.promo.delete');
     Route::post('/content/promo/{promo_id}', 'PromoController@edit')->name('content.promo.edit');
+    Route::get('/content/promo/data', 'PromoController@datatable')->name('content.promo');
     //Controller Diskusi
     Route::get('/content/diskusi', 'DiskusiController@index')->name('content.diskusi');
     //COntroller Forum
@@ -46,7 +49,8 @@ Route::middleware(['auth_granted'])->group(function(){
     Route::get('/content/maps', 'MapsController@index')->name('maps.index');
 
     Route::get('/content/maps/tambah', 'MapsController@add')->name('maps.tambah');
-    Route::get('/content/maps/tambah', 'MapsController@store')->name('maps.store');
+    Route::post('/content/maps/tambah', 'MapsController@store')->name('maps.store');
+    Route::get('/test', 'MapsController@test')->name('maps.test');
 
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });

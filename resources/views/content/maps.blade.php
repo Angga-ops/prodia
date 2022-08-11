@@ -10,7 +10,8 @@
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between items-center">
                             <h6>Alamat</h6>
-                            <a href="{{ route('maps.tambah') }}" class="btn d-flex btn-md btn-primary mx-1"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</a>
+                            <a href="{{ url('/content/maps/tambah') }}" class="btn d-flex btn-md btn-primary mx-1"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Tambah</a>
+                            <a href="{{ url('/test') }}" class="btn d-flex btn-md btn-primary mx-1"><i class="fa fa-plus m-auto" aria-hidden="true"></i> &nbsp Test</a>
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

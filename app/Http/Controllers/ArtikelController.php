@@ -8,19 +8,49 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
+use DataTables;
 class ArtikelController extends Controller
 {
     private $baseUrl =  'http://103.214.53.148:51999/v1/article';
-    public function index(Request $request){
+
+    public function index(Request $req){
+        if($req->ajax()){
+            $request = Http::withToken(session('token'))->get($this->baseUrl);
+            $response = $request->getBody()->getContents();
+            $data = json_decode($response,true);
+            $result = array_key_exists("articles",$data) ? $data['articles']:[];
+            return DataTables::of($result)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        return view('content.artikel');
+        // $cr = new Carbon();
+        // $cr::setLocale('id');
+        // return View::make('content.artikel',[
+        //     'data' => $data,
+        //     'carbon' => $cr
+        // ]);
+    }
+
+    public function test()
+    {
         $request = Http::withToken(session('token'))->get($this->baseUrl);
-        $response = $request->getBody()->getContents();
-        $data = json_decode($response,true);
-        $cr = new Carbon();
-        $cr::setLocale('id');
-        return View::make('content.artikel',[
-            'data' => $data,
-            'carbon' => $cr
-        ]);
+            $response = $request->getBody()->getContents();
+            $data = json_decode($response,true);
+            $result = array_key_exists("articles",$data) ? $data['articles']:[];
+            return DataTables::of($result)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     public function addArticle(Request $request){
